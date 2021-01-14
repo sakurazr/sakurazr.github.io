@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <title>
-        Archive |
+        Less/Sass/Scss的区别 |
         
         Keep
     </title>
@@ -55,7 +55,7 @@
                 </li>
             
                 <li class="menu-item">
-                    <a class="active"
+                    <a class=""
                        href="/archives"
                     >
                         ARCHIVES
@@ -78,7 +78,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/archives">ARCHIVES</a>
                 </li>
             
@@ -98,104 +98,97 @@
 
                     
                         <div class="fade-in-down-animation">
-    <div class="archive-container ">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Less/Sass/Scss的区别</span>
+        </div>
+
         
-<div class="archive-list-container">
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span>SakuraZr</span>
+                        <span class="level">Lv1</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-calendar"></i> 2021-01-14 23:08:47
+    </span>
     
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2021</span>
-                <span class="archive-year-post-count">(4)</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/01/14/Less-Sass-Scss%E7%9A%84%E5%8C%BA%E5%88%AB/"
-                        >Less/Sass/Scss的区别</a>
-                        <span class="article-date">01-14</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/01/14/new%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/"
-                        >new的模拟实现</a>
-                        <span class="article-date">01-14</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/01/12/webpack%E5%B8%B8%E8%A7%81%E6%8F%92%E4%BB%B6%E5%92%8Cloader%E5%8F%8A%E4%BD%9C%E7%94%A8/"
-                        >webpack常见插件和loader及作用</a>
-                        <span class="article-date">01-12</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/01/11/cookie%E3%80%81sessionStorage%E5%92%8ClocalStorage%E7%9A%84%E5%8C%BA%E5%88%AB/"
-                        >cookie、sessionStorage和localStorage的区别</a>
-                        <span class="article-date">01-11</span>
-                    </li>
-                
-            </ul>
-        </section>
     
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2020</span>
-                <span class="archive-year-post-count">(6)</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/12/29/ts-%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E/"
-                        >ts-变量声明</a>
-                        <span class="article-date">12-29</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/12/29/ts-%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B/"
-                        >ts-基础类型</a>
-                        <span class="article-date">12-29</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/12/28/class%E7%B1%BB/"
-                        >class类</a>
-                        <span class="article-date">12-28</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/12/27/hooks/"
-                        >hooks</a>
-                        <span class="article-date">12-27</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/12/26/test/"
-                        >test</a>
-                        <span class="article-date">12-26</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/12/26/hello-world/"
-                        >Hello World</a>
-                        <span class="article-date">12-26</span>
-                    </li>
-                
-            </ul>
-        </section>
+
+    
+    
+    
     
 </div>
 
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p><strong>Scss其实是Sass的改进版本</strong><br>Scss是Sass的缩排语法，对于写惯css前端的web开发者来说很不直观，也不能将css代码加入到Sass里面，因此Sass语法进行了改良，Sass 3就变成了Scss(sassy css)。与原来的语法兼容，只是用{}取代了原来的缩进。</p>
+<p><strong>Less环境较Sass简单</strong><br>Sass的安装需要安装Ruby环境，Less基于JavaScript，需要引入Less.js来处理代码输出css</p>
+<p><strong>变量符不一样，Less是@，而Sass是$，而且变量的作用域也不一样。</strong><br>Sass没有局部变量，满足就近原则。Less中{}内定义的变量为局部变量。</p>
+<p><strong>Less没有输出设置，Sass提供4中输出选项</strong><br>输出样式的风格可以有四种选择，默认为nested<br>nested：嵌套缩进的css代码<br>expanded：展开的多行css代码<br>compact：简洁格式的css代码<br>compressed：压缩后的css代码</p>
+<p><strong>Sass支持条件语句，可以使用if{}else{},for{}循环等等。而Less不支持。</strong></p>
+<p><strong>Less与Sass处理机制不一样</strong><br>Less是通过客户端处理的，Sass是通过服务端处理，相比较之下Less解析会比Sass慢一点</p>
+<p><strong>Sass和Less的工具库不同</strong><br>Sass有工具库Compass, 简单说，Sass和Compass的关系有点像Javascript和jQuery的关系,Compass是Sass的工具库。在     它的基础上，封装了一系列有用的模块和模板，补充强化了Sass的功能。<br>Less有UI组件库Bootstrap, Bootstrap是web前端开发中一个比较有名的前端UI组件库，Bootstrap的样式文件部分源码就是采用Less语法编写，不过Bootstrap4也开始用Sass编写了。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Less/Sass/Scss的区别</li>
+        <li>Post author：SakuraZr</li>
+        <li>Create time：2021-01-14 23:08:47</li>
+        <li>
+            Post link：https://keep.xpoet.cn/2021/01/14/Less-Sass-Scss的区别/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/01/14/new%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">new的模拟实现</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center" >
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
     </div>
 </div>
+
 
                     
                 </main>
@@ -283,6 +276,12 @@
     <!-- page aside -->
     <aside class="page-aside">
         
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        
+    </div>
+</div>
+        
     </aside>
 
     <!-- image viewer -->
@@ -302,6 +301,15 @@
 
 
 
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.0.4/source/js/left-side-toggle.js"></script>
+
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.0.4/source/js/code-copy.js"></script>
+    
+
+    
 
 
 </body>
