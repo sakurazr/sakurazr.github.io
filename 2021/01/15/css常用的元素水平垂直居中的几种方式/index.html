@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <title>
-        webpack常见插件和loader及作用 |
+        css常用的元素水平垂直居中的几种方式 |
         
         Keep
     </title>
@@ -101,7 +101,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">webpack常见插件和loader及作用</span>
+            <span class="title-hover-animation">css常用的元素水平垂直居中的几种方式</span>
         </div>
 
         
@@ -117,7 +117,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-calendar"></i> 2021-01-12 23:31:34
+        <i class="fas fa-calendar"></i> 2021-01-15 23:41:56
     </span>
     
     
@@ -134,29 +134,35 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h2><p>webpack将一切文件视为模块，但是webpack原生是只能解析js文件，如果想将其他文件也打包的话，就会用到loader。 所以Loader的作用是让webpack拥有了加载和解析非JavaScript文件的能力。</p>
-<p><strong>常见loader</strong></p>
-<ul>
-<li>style-loader：将CSS添加到DOM的内联样式标签style里</li>
-<li>css-loader：允许将CSS文件通过require的方式引入，并返回CSS代码</li>
-<li>less-loader：处理less</li>
-<li>sass-loader：处理sass</li>
-<li>postcss-loader：用postcss来处理CSS</li>
-<li>file-loader：分发文件到output目录并返回相对路径</li>
-<li>url-loader 和 file-loader 类似，但是当文件小于设定的limit时可以返回一个Data Url</li>
-<li>html-minify-loader：压缩HTML文件</li>
-<li>babel-loader：把ES6文件转换成ES5文件</li>
-</ul>
-<h2 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h2><p>loader 用于转换某些类型的模块，而插件则可以用于执行范围更广的任务。包括：打包优化，资源管理，注入环境变量。</p>
-<p><strong>常见插件</strong></p>
-<ul>
-<li>html-webpack-plugin：会在打包结束之后自动创建一个index.html, 并将打包好的JS自动引入到这个文件中</li>
-<li>webpack-dev-server：启动一个本地临时的服务器，可以设置端口，支持热更新</li>
-<li>clean-webpack-plugin：每次打包之前先将指定的文件夹清空再生成新的文件</li>
-<li>copy-webpack-plugin：打包相关的文档（如word等）。文档内容是固定不变的, 只需要将对应的文件拷贝到打包目录中即可</li>
-<li>commons-chunk-plugin：提取公共代码</li>
-<li>define-plugin：定义环境变量</li>
-</ul>
+            <pre><code>1、定位 盒子宽高已知， 
+position: absolute; 
+left: 50%; top: 50%; 
+margin-left:-自身一半宽度; 
+margin-top: -自身一半高度;
+
+2、table-cell布局 
+父级 display: table-cell; vertical-align: middle;  
+子级 margin: 0 auto;
+
+3、定位 + transform ; 适用于 子盒子 宽高不定时； 
+    position: relative / absolute;
+    /*top和left偏移各为50%*/
+       top: 50%;
+       left: 50%;
+    /*translate(-50%,-50%) 偏移自身的宽和高的-50%*/
+    transform: translate(-50%, -50%); 
+
+4、flex 布局
+    父级： 
+        /*flex 布局*/
+        display: flex;
+        /*实现垂直居中*/
+        align-items: center;
+        /*实现水平居中*/
+        justify-content: center;
+
+
+再加一种水平方向上居中 ：margin-left : 50% ; transform: translateX(-50%);</code></pre>
 
         </div>
 
@@ -164,11 +170,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：webpack常见插件和loader及作用</li>
+        <li>Post title：css常用的元素水平垂直居中的几种方式</li>
         <li>Post author：SakuraZr</li>
-        <li>Create time：2021-01-12 23:31:34</li>
+        <li>Create time：2021-01-15 23:41:56</li>
         <li>
-            Post link：https://keep.xpoet.cn/2021/01/12/webpack常见插件和loader及作用/
+            Post link：https://keep.xpoet.cn/2021/01/15/css常用的元素水平垂直居中的几种方式/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -182,29 +188,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/01/14/new%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/"
-                        >
-                            <span class="left arrow-icon flex-center" >
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">new的模拟实现</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/01/11/cookie%E3%80%81sessionStorage%E5%92%8ClocalStorage%E7%9A%84%E5%8C%BA%E5%88%AB/"
+                           href="/2021/01/14/Less-Sass-Scss%E7%9A%84%E5%8C%BA%E5%88%AB/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">cookie、sessionStorage和localStorage的区别</span>
+                                <span class="post-nav-title-item">Less/Sass/Scss的区别</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center" >
@@ -309,7 +300,7 @@
         
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#loader"><span class="nav-number">1.</span> <span class="nav-text">loader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plugin"><span class="nav-number">2.</span> <span class="nav-text">plugin</span></a></li></ol>
+        
     </div>
 </div>
         
