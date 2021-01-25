@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <title>
-        继承 |
+        proxy |
         
         Keep
     </title>
@@ -101,7 +101,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">继承</span>
+            <span class="title-hover-animation">proxy</span>
         </div>
 
         
@@ -117,7 +117,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-calendar"></i> 2021-01-22 22:25:25
+        <i class="fas fa-calendar"></i> 2021-01-25 23:16:22
     </span>
     
     
@@ -134,27 +134,45 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="ES5继承"><a href="#ES5继承" class="headerlink" title="ES5继承"></a>ES5继承</h2><ol>
-<li>在子类中通过call / apply方法借助父类的构造函数</li>
-<li>将子类的原型函数设置为父类的实例对象</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">myName, myAge</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = myName;</span><br><span class="line">    <span class="built_in">this</span>.age = myAge;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.say = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name, <span class="built_in">this</span>.age);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">myName, myAge, myScore</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 1.在子类中通过call/apply方法借助父类的构造函数</span></span><br><span class="line">    Person.call(<span class="built_in">this</span>, myName, myAge);</span><br><span class="line">    <span class="built_in">this</span>.score = myScore;</span><br><span class="line">    <span class="built_in">this</span>.study = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;day day up&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 2.将子类的原型对象设置为父类的实例对象</span></span><br><span class="line">Student.prototype = <span class="keyword">new</span> Person();</span><br><span class="line">Student.prototype.constructor = Student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> stu = <span class="keyword">new</span> Student(<span class="string">&quot;zs&quot;</span>, <span class="number">18</span>, <span class="number">98</span>);</span><br><span class="line">stu.say();  <span class="comment">// zs 18</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="ES6继承"><a href="#ES6继承" class="headerlink" title="ES6继承"></a>ES6继承</h2><ol>
-<li>通过子类extends父类, 来告诉浏览器子类要继承父类</li>
-<li>通过super()方法修改 this</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">myName, myAge</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// this = stu;</span></span><br><span class="line">        <span class="built_in">this</span>.name = myName; <span class="comment">// stu.name = myName;</span></span><br><span class="line">        <span class="built_in">this</span>.age = myAge;   <span class="comment">// stu.age = myAge;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">say</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name, <span class="built_in">this</span>.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 以下代码的含义: 告诉浏览器将来Student这个类需要继承Person这个类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">myName, myAge, myScore</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>(myName, myAge);   <span class="comment">// 这一行代码相当于在子类中通过call/apply方法借助父类的构造函数</span></span><br><span class="line">        <span class="built_in">this</span>.score = myScore;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">study</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;day day up&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> stu = <span class="keyword">new</span> Student(<span class="string">&quot;zs&quot;</span>, <span class="number">18</span>, <span class="number">98</span>);</span><br><span class="line">stu.say();  <span class="comment">// zs 18</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+            <h2 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h2><p>Proxy 是一种构造器，所以是通过new关键字实现的，从功能上讲，也是一种拦截器，在设置对象属性或者读取对象属性时做一层拦截操作。</p>
+<p>Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器”。</p>
+<blockquote>
+<p>语法：let p = new Proxy(target, handler)<br>target：用Proxy包装的目标对象（可以是任何类型的对象，包括原生数组、函数、甚至另一个代理）<br>handler ：一个对象，用来定制拦截行为</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;<span class="attr">name</span>:<span class="string">&#x27;wxp&#x27;</span>&#125;,&#123;</span><br><span class="line">	<span class="function"><span class="title">get</span>(<span class="params">target,key,value,proxy</span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">2</span>)&#125;,</span><br><span class="line">	<span class="function"><span class="title">set</span>(<span class="params">target,key,value,proxy</span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">3</span>)&#125;</span><br><span class="line">&#125;);</span><br><span class="line">obj.name = <span class="number">1</span>;<span class="comment">//当设置对象属性值，打印3</span></span><br><span class="line">obj.name;<span class="comment">//当获取对象，打印2</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例</strong></p>
+<p>对 set 做拦截，比如规定设置属性值时必须符合某个要求：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置属性 point 必须是小于0的数字。</span></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;,&#123;</span><br><span class="line"><span class="function"><span class="title">get</span>(<span class="params">target,key,value,proxy</span>)</span>&#123;&#125;,</span><br><span class="line"><span class="function"><span class="title">set</span>(<span class="params">target,key,value,proxy</span>)</span>&#123;<span class="keyword">if</span>(value&lt;<span class="number">0</span>)&#123;<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;The value seems invalid&#x27;</span>);&#125;&#125;</span><br><span class="line">&#125;);</span><br><span class="line">obj.point = -<span class="number">1</span>;<span class="comment">//报错</span></span><br></pre></td></tr></table></figure>
+<p>对 get 做拦截，比如没有某个属性的时候报错：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//没有 point 属性的时候报错。</span></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;<span class="attr">point</span>: <span class="number">2</span>&#125;, &#123;</span><br><span class="line">    <span class="function"><span class="title">get</span>(<span class="params">target, key, value, proxy</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> pro <span class="keyword">in</span> target) &#123;</span><br><span class="line">        <span class="keyword">if</span> (target[pro]) &#123;</span><br><span class="line">          <span class="keyword">return</span> target[pro]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;The value seems invalid&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;&#125;,</span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">target, key, value, proxy</span>)</span>&#123;&#125;</span><br><span class="line">&#125;)</span><br><span class="line">;</span><br><span class="line">obj.age <span class="comment">//报错，没有age这个属性</span></span><br></pre></td></tr></table></figure>
+<p><strong>Proxy 支持的拦截操作：</strong></p>
+<ul>
+<li>**get(target, propKey, receiver)**：拦截对象属性的读取，比如proxy.foo和proxy[‘foo’]。</li>
+<li>**set(target, propKey, value, receiver)**：拦截对象属性的设置，比如proxy.foo =v或proxy[‘foo’] = v，返回一个布尔值。</li>
+<li>**has(target, propKey)**：拦截propKey in proxy的操作，返回一个布尔值。</li>
+<li>**deleteProperty(target, propKey)**：拦截delete proxy[propKey]的操作，返回一个布尔值。</li>
+<li>**ownKeys(target)**：拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)、for…in循环，返回一个数组。该方法返回目标对象所有自身的属性的属性名，而Object.keys()的返回结果仅包括目标对象自身的可遍历属性。</li>
+<li>**getOwnPropertyDescriptor(target, propKey)**：拦截Object.getOwnPropertyDescriptor(proxy, propKey)，返回属性的描述对象。</li>
+<li>**defineProperty(target, propKey,propDesc)**：拦截Object.defineProperty(proxy, propKey, propDesc）、Object.defineProperties(proxy, propDescs)，返回一个布尔值。</li>
+<li>**preventExtensions(target)**：拦截Object.preventExtensions(proxy)，返回一个布尔值。</li>
+<li>**getPrototypeOf(target)**：拦截Object.getPrototypeOf(proxy)，返回一个对象。</li>
+<li>**isExtensible(target)**：拦截Object.isExtensible(proxy)，返回一个布尔值。</li>
+<li>**setPrototypeOf(target, proto)**：拦截Object.setPrototypeOf(proxy,proto)，返回一个布尔值。如果目标对象是函数，那么还有两种额外操作可以拦截。</li>
+<li>**apply(target, object, args)**：拦截 Proxy实例作为函数调用的操作，比如proxy(…args)、proxy.call(object, …args)、proxy.apply(…)。</li>
+<li>**construct(target, args)**：拦截 Proxy 实例作为构造函数调用的操作，比如new proxy(…args)。</li>
+</ul>
+
         </div>
 
         
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：继承</li>
+        <li>Post title：proxy</li>
         <li>Post author：SakuraZr</li>
-        <li>Create time：2021-01-22 22:25:25</li>
+        <li>Create time：2021-01-25 23:16:22</li>
         <li>
-            Post link：https://keep.xpoet.cn/2021/01/22/继承/
+            Post link：https://keep.xpoet.cn/2021/01/25/proxy/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -168,29 +186,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/01/25/proxy/"
-                        >
-                            <span class="left arrow-icon flex-center" >
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">proxy</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/01/20/%E5%8E%9F%E5%9E%8B%E9%93%BE/"
+                           href="/2021/01/22/%E7%BB%A7%E6%89%BF/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">原型链</span>
+                                <span class="post-nav-title-item">继承</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center" >
@@ -295,7 +298,7 @@
         
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ES5%E7%BB%A7%E6%89%BF"><span class="nav-number">1.</span> <span class="nav-text">ES5继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6%E7%BB%A7%E6%89%BF"><span class="nav-number">2.</span> <span class="nav-text">ES6继承</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxy"><span class="nav-number">1.</span> <span class="nav-text">Proxy</span></a></li></ol>
     </div>
 </div>
         
