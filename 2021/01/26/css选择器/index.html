@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <title>
-        proxy |
+        css选择器 |
         
         Keep
     </title>
@@ -101,7 +101,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">proxy</span>
+            <span class="title-hover-animation">css选择器</span>
         </div>
 
         
@@ -117,7 +117,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-calendar"></i> 2021-01-25 23:16:22
+        <i class="fas fa-calendar"></i> 2021-01-26 23:27:59
     </span>
     
     
@@ -134,33 +134,14 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h2><p>Proxy 是一种构造器，所以是通过new关键字实现的，从功能上讲，也是一种拦截器，在设置对象属性或者读取对象属性时做一层拦截操作。</p>
-<p>Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器”。</p>
-<blockquote>
-<p>语法：let p = new Proxy(target, handler)<br>target：用Proxy包装的目标对象（可以是任何类型的对象，包括原生数组、函数、甚至另一个代理）<br>handler ：一个对象，用来定制拦截行为</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;<span class="attr">name</span>:<span class="string">&#x27;wxp&#x27;</span>&#125;,&#123;</span><br><span class="line">	<span class="function"><span class="title">get</span>(<span class="params">target,key,value,proxy</span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">2</span>)&#125;,</span><br><span class="line">	<span class="function"><span class="title">set</span>(<span class="params">target,key,value,proxy</span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">3</span>)&#125;</span><br><span class="line">&#125;);</span><br><span class="line">obj.name = <span class="number">1</span>;<span class="comment">//当设置对象属性值，打印3</span></span><br><span class="line">obj.name;<span class="comment">//当获取对象，打印2</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例</strong></p>
-<p>对 set 做拦截，比如规定设置属性值时必须符合某个要求：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置属性 point 必须是小于0的数字。</span></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;,&#123;</span><br><span class="line"><span class="function"><span class="title">get</span>(<span class="params">target,key,value,proxy</span>)</span>&#123;&#125;,</span><br><span class="line"><span class="function"><span class="title">set</span>(<span class="params">target,key,value,proxy</span>)</span>&#123;<span class="keyword">if</span>(value&lt;<span class="number">0</span>)&#123;<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;The value seems invalid&#x27;</span>);&#125;&#125;</span><br><span class="line">&#125;);</span><br><span class="line">obj.point = -<span class="number">1</span>;<span class="comment">//报错</span></span><br></pre></td></tr></table></figure>
-<p>对 get 做拦截，比如没有某个属性的时候报错：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//没有 point 属性的时候报错。</span></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;<span class="attr">point</span>: <span class="number">2</span>&#125;, &#123;</span><br><span class="line">    <span class="function"><span class="title">get</span>(<span class="params">target, key, value, proxy</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> pro <span class="keyword">in</span> target) &#123;</span><br><span class="line">        <span class="keyword">if</span> (target[pro]) &#123;</span><br><span class="line">          <span class="keyword">return</span> target[pro]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;The value seems invalid&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;&#125;,</span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">target, key, value, proxy</span>)</span>&#123;&#125;</span><br><span class="line">&#125;)</span><br><span class="line">;</span><br><span class="line">obj.age <span class="comment">//报错，没有age这个属性</span></span><br></pre></td></tr></table></figure>
-<p><strong>Proxy 支持的拦截操作：</strong></p>
-<ul>
-<li>**get(target, propKey, receiver)**：拦截对象属性的读取，比如proxy.foo和proxy[‘foo’]。</li>
-<li>**set(target, propKey, value, receiver)**：拦截对象属性的设置，比如proxy.foo =v或proxy[‘foo’] = v，返回一个布尔值。</li>
-<li>**has(target, propKey)**：拦截propKey in proxy的操作，返回一个布尔值。</li>
-<li>**deleteProperty(target, propKey)**：拦截delete proxy[propKey]的操作，返回一个布尔值。</li>
-<li>**ownKeys(target)**：拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)、for…in循环，返回一个数组。该方法返回目标对象所有自身的属性的属性名，而Object.keys()的返回结果仅包括目标对象自身的可遍历属性。</li>
-<li>**getOwnPropertyDescriptor(target, propKey)**：拦截Object.getOwnPropertyDescriptor(proxy, propKey)，返回属性的描述对象。</li>
-<li>**defineProperty(target, propKey,propDesc)**：拦截Object.defineProperty(proxy, propKey, propDesc）、Object.defineProperties(proxy, propDescs)，返回一个布尔值。</li>
-<li>**preventExtensions(target)**：拦截Object.preventExtensions(proxy)，返回一个布尔值。</li>
-<li>**getPrototypeOf(target)**：拦截Object.getPrototypeOf(proxy)，返回一个对象。</li>
-<li>**isExtensible(target)**：拦截Object.isExtensible(proxy)，返回一个布尔值。</li>
-<li>**setPrototypeOf(target, proto)**：拦截Object.setPrototypeOf(proxy,proto)，返回一个布尔值。如果目标对象是函数，那么还有两种额外操作可以拦截。</li>
-<li>**apply(target, object, args)**：拦截 Proxy实例作为函数调用的操作，比如proxy(…args)、proxy.call(object, …args)、proxy.apply(…)。</li>
-<li>**construct(target, args)**：拦截 Proxy 实例作为构造函数调用的操作，比如new proxy(…args)。</li>
-</ul>
+            <p>==元素选择器== 标签名{ }<br>==id选择器== #id属性值{ }<br>==类选择器== ·class属性值{ }</p>
+<p>==选择器分组（并集选择器）==<br>作用：通过它可以同时选中多个选择器对应的元素（通常用于集体声明）<br>语法：选择器1，选择器2，选择器n{ }</p>
+<p>==通配选择器==<br>作用：用来选中页面中所有的元素<br>语法：*{ }</p>
+<p>==后代元素选择器==<br>作用：选中指定元素的指定后代元素<br>语法：祖先元素 后代元素{ }  div span{ }</p>
+<p>==子元素选择器==<br>作用：选中指定父元素的子元素<br>语法：父元素&gt;子元素 div&gt;span{ }</p>
+<p>==伪类选择器==<br>伪类表示元素的一种特殊状态<br>:link       超链接点击之前的状态<br>:hover 　　移入时元素的状态<br>:visited　　已被访问过后的元素的状态  未zi提的<br>:active　　被点击时元素的状态<br>:focus  是某个标签获得焦点时的样式（比如某个输入框获得焦点<br>E:first-child　　E:last-child　　E:only-child　　E:nth-child(n)　　E:nth-last-child(n)<br>E:first-of-type　　E:last-of-type　　E:only-of-type　　E:nth-of-type(n)　　E:nth-of-last-type(n)   </p>
+<p>==属性选择器==<br>作用：根据元素中的属性或属性值来选取指定元素<br>语法：[属性名]选取含有指定属性的元素<br> [属性名=“属性值”]选取含指定属性值的元素<br> [属性名^=”属性值”] 选取属性值以指定内容开头的元素<br> [属性名$=”属性值”] 选取属性值以指定内容结尾的元素<br> [属性名*=”属性值”] 选取属性值包含指定内容的元素</p>
+<p>==兄弟元素选择器==<br>+选择器  div+span<br>作用：选中一个元素后紧挨着的指定的兄弟元素<br>语法：前一个+后一个（作用在后一个）<br><del>选择器   div ~ span<br>作用：选中后边所有的制定兄弟元素<br>语法：前一个</del>后边所有</p>
 
         </div>
 
@@ -168,11 +149,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：proxy</li>
+        <li>Post title：css选择器</li>
         <li>Post author：SakuraZr</li>
-        <li>Create time：2021-01-25 23:16:22</li>
+        <li>Create time：2021-01-26 23:27:59</li>
         <li>
-            Post link：https://keep.xpoet.cn/2021/01/25/proxy/
+            Post link：https://keep.xpoet.cn/2021/01/26/css选择器/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -189,13 +170,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/01/26/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"
+                           href="/2021/01/26/sprite%E6%98%AF%E4%BB%80%E4%B9%88-%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E7%BC%BA%E7%82%B9/"
                         >
                             <span class="left arrow-icon flex-center" >
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">观察者模式</span>
+                                <span class="post-nav-title-item">css sprite是什么,有什么优缺点</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -205,10 +186,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/01/22/%E7%BB%A7%E6%89%BF/"
+                           href="/2021/01/26/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">继承</span>
+                                <span class="post-nav-title-item">观察者模式</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center" >
@@ -313,7 +294,7 @@
         
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxy"><span class="nav-number">1.</span> <span class="nav-text">Proxy</span></a></li></ol>
+        
     </div>
 </div>
         

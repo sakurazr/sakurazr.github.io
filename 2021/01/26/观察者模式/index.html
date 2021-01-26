@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <title>
-        proxy |
+        观察者模式 |
         
         Keep
     </title>
@@ -101,7 +101,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">proxy</span>
+            <span class="title-hover-animation">观察者模式</span>
         </div>
 
         
@@ -117,7 +117,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-calendar"></i> 2021-01-25 23:16:22
+        <i class="fas fa-calendar"></i> 2021-01-26 23:19:21
     </span>
     
     
@@ -134,32 +134,20 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h2><p>Proxy 是一种构造器，所以是通过new关键字实现的，从功能上讲，也是一种拦截器，在设置对象属性或者读取对象属性时做一层拦截操作。</p>
-<p>Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器”。</p>
-<blockquote>
-<p>语法：let p = new Proxy(target, handler)<br>target：用Proxy包装的目标对象（可以是任何类型的对象，包括原生数组、函数、甚至另一个代理）<br>handler ：一个对象，用来定制拦截行为</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;<span class="attr">name</span>:<span class="string">&#x27;wxp&#x27;</span>&#125;,&#123;</span><br><span class="line">	<span class="function"><span class="title">get</span>(<span class="params">target,key,value,proxy</span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">2</span>)&#125;,</span><br><span class="line">	<span class="function"><span class="title">set</span>(<span class="params">target,key,value,proxy</span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">3</span>)&#125;</span><br><span class="line">&#125;);</span><br><span class="line">obj.name = <span class="number">1</span>;<span class="comment">//当设置对象属性值，打印3</span></span><br><span class="line">obj.name;<span class="comment">//当获取对象，打印2</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例</strong></p>
-<p>对 set 做拦截，比如规定设置属性值时必须符合某个要求：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置属性 point 必须是小于0的数字。</span></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;,&#123;</span><br><span class="line"><span class="function"><span class="title">get</span>(<span class="params">target,key,value,proxy</span>)</span>&#123;&#125;,</span><br><span class="line"><span class="function"><span class="title">set</span>(<span class="params">target,key,value,proxy</span>)</span>&#123;<span class="keyword">if</span>(value&lt;<span class="number">0</span>)&#123;<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;The value seems invalid&#x27;</span>);&#125;&#125;</span><br><span class="line">&#125;);</span><br><span class="line">obj.point = -<span class="number">1</span>;<span class="comment">//报错</span></span><br></pre></td></tr></table></figure>
-<p>对 get 做拦截，比如没有某个属性的时候报错：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//没有 point 属性的时候报错。</span></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;<span class="attr">point</span>: <span class="number">2</span>&#125;, &#123;</span><br><span class="line">    <span class="function"><span class="title">get</span>(<span class="params">target, key, value, proxy</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> pro <span class="keyword">in</span> target) &#123;</span><br><span class="line">        <span class="keyword">if</span> (target[pro]) &#123;</span><br><span class="line">          <span class="keyword">return</span> target[pro]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;The value seems invalid&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;&#125;,</span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">target, key, value, proxy</span>)</span>&#123;&#125;</span><br><span class="line">&#125;)</span><br><span class="line">;</span><br><span class="line">obj.age <span class="comment">//报错，没有age这个属性</span></span><br></pre></td></tr></table></figure>
-<p><strong>Proxy 支持的拦截操作：</strong></p>
+            <h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><p><strong>概念</strong>：定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新<br><strong>主要解决</strong>：一个对象状态改变给其他对象通知的问题，而且要考虑到易用和低耦合，保证高度的协作。</p>
+<p><strong>观察者模式的结构中包含四种角色</strong>：<br>（1）<strong>主题（Subject）</strong>：主题是一个接口，该接口规定了具体主题需要实现的方法，比如，添加、删除观察者以及通知观察者更新数据的方法。<br>（2）<strong>观察者（Observer）</strong>：观察者是一个接口，该接口规定了具体观察者用来更新数据的方法。<br>（3）<strong>具体主题（ConcreteSubject）</strong>：具体主题是实现主题接口类的一个实例，该实例包含有可以经常发生变化的数据。具体主题需使用一个集合，比如ArrayList，存放观察者的引用，以便数据变化时通知具体观察者。<br>（4）<strong>具体观察者（ConcreteObserver）</strong>：具体观察者是实现观察者接口类的一个实例。具体观察者包含有可以存放具体主题引用的主题接口变量，以便具体观察者让具体主题将自己的引用添加到具体主题的集合中，使自己成为它的观察者，或让这个具体主题将自己从具体主题的集合中删除，使自己不再是它的观察者。</p>
+<p><strong>优点</strong></p>
 <ul>
-<li>**get(target, propKey, receiver)**：拦截对象属性的读取，比如proxy.foo和proxy[‘foo’]。</li>
-<li>**set(target, propKey, value, receiver)**：拦截对象属性的设置，比如proxy.foo =v或proxy[‘foo’] = v，返回一个布尔值。</li>
-<li>**has(target, propKey)**：拦截propKey in proxy的操作，返回一个布尔值。</li>
-<li>**deleteProperty(target, propKey)**：拦截delete proxy[propKey]的操作，返回一个布尔值。</li>
-<li>**ownKeys(target)**：拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)、for…in循环，返回一个数组。该方法返回目标对象所有自身的属性的属性名，而Object.keys()的返回结果仅包括目标对象自身的可遍历属性。</li>
-<li>**getOwnPropertyDescriptor(target, propKey)**：拦截Object.getOwnPropertyDescriptor(proxy, propKey)，返回属性的描述对象。</li>
-<li>**defineProperty(target, propKey,propDesc)**：拦截Object.defineProperty(proxy, propKey, propDesc）、Object.defineProperties(proxy, propDescs)，返回一个布尔值。</li>
-<li>**preventExtensions(target)**：拦截Object.preventExtensions(proxy)，返回一个布尔值。</li>
-<li>**getPrototypeOf(target)**：拦截Object.getPrototypeOf(proxy)，返回一个对象。</li>
-<li>**isExtensible(target)**：拦截Object.isExtensible(proxy)，返回一个布尔值。</li>
-<li>**setPrototypeOf(target, proto)**：拦截Object.setPrototypeOf(proxy,proto)，返回一个布尔值。如果目标对象是函数，那么还有两种额外操作可以拦截。</li>
-<li>**apply(target, object, args)**：拦截 Proxy实例作为函数调用的操作，比如proxy(…args)、proxy.call(object, …args)、proxy.apply(…)。</li>
-<li>**construct(target, args)**：拦截 Proxy 实例作为构造函数调用的操作，比如new proxy(…args)。</li>
+<li>观察者模式可以实现 表示层和数据逻辑层的分离，并降低观察目标和观察者之间的耦合度；</li>
+<li>观察者模式支持简单广播通信，自动通知所有已经订阅过的对象；</li>
+<li>观察者模式 符合开闭原则的要求；</li>
+<li>观察目标和观察者之间的抽象耦合关系能够单独扩展以及中庸。</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>当一个观察目标有多个直接或间接的观察者时，通知所有观察者的过程将会话费很多时间。</li>
+<li>当观察目标和观察者之间存在循环依赖时，观察目标会触发他们之间进行循环调用，可能导致系统崩溃。</li>
+<li>观察者模式缺少相应机制，让观察者知道所观察的目标对象是怎么发生变化的，而仅仅只是知道观察目标发生了变化。</li>
 </ul>
 
         </div>
@@ -168,11 +156,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：proxy</li>
+        <li>Post title：观察者模式</li>
         <li>Post author：SakuraZr</li>
-        <li>Create time：2021-01-25 23:16:22</li>
+        <li>Create time：2021-01-26 23:19:21</li>
         <li>
-            Post link：https://keep.xpoet.cn/2021/01/25/proxy/
+            Post link：https://keep.xpoet.cn/2021/01/26/观察者模式/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -189,13 +177,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/01/26/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"
+                           href="/2021/01/26/css%E9%80%89%E6%8B%A9%E5%99%A8/"
                         >
                             <span class="left arrow-icon flex-center" >
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">观察者模式</span>
+                                <span class="post-nav-title-item">css选择器</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -205,10 +193,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/01/22/%E7%BB%A7%E6%89%BF/"
+                           href="/2021/01/25/proxy/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">继承</span>
+                                <span class="post-nav-title-item">proxy</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center" >
@@ -313,7 +301,7 @@
         
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxy"><span class="nav-number">1.</span> <span class="nav-text">Proxy</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">观察者模式</span></a></li></ol>
     </div>
 </div>
         
